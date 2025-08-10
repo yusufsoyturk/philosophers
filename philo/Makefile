@@ -6,7 +6,9 @@ RM = rm -rf
 
 CFLAGS = -Wall -Wextra -Werror 
 
-UTILS = utils/utils.c
+UTILS = utils/arg_checker.c \
+		utils/ft_atol.c \
+		
 
 SRCS = $(UTILS)\
 		 main.c\
