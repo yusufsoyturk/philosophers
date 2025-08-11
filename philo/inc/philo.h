@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/11 15:18:59 by ysoyturk          #+#    #+#             */
+/*   Updated: 2025/08/11 16:25:21 by ysoyturk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 #define PHILO_H
 
-# include <limits.h>    // INT_MAX
-#include <string.h>     // memset
-#include <stdio.h>      // printf
-#include <stdlib.h>     // malloc, free
-#include <unistd.h>     // write, usleep
+# include <limits.h>	// INT_MAX
+#include <string.h>		// memset
+#include <stdio.h>		// printf
+#include <stdlib.h>		// malloc, free
+#include <unistd.h>		// write, usleep
 #include <sys/time.h>   // gettimeofday
 #include <pthread.h>	// pthreads için 
 
@@ -33,11 +45,14 @@ typedef struct s_prog
 	long			time_to_sleep;
 	long            num_times_to_eat;
 	size_t			start_time;
+	t_philo			*philos;
 }			t_prog;
 
 long	ft_atol(char *str);
 int	arg_checker(char **av);
 int	arg_val_checker(char **av);
-
+void	ft_init_prog(t_prog *prog, char **av);
+void	ft_init_philos(t_prog *prog);
+size_t ft_get_time();
 
 #endif

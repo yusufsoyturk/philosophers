@@ -11,6 +11,7 @@ UTILS = utils/arg_checker.c \
 		
 
 SRCS = $(UTILS)\
+		init.c \
 		 main.c\
 
 OBJS = $(SRCS:.c=.o)
