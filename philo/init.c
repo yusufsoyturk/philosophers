@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:25:50 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/11 16:19:04 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/11 18:37:41 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	ft_init_philos(t_prog *prog)
 		prog->philos[i].meals_eaten = 0;
 		prog->philos[i].r_fork = &prog->forks[i];
 		prog->philos[i].l_fork = &prog->forks[(i + prog->num_of_philos - 1) % prog->num_of_philos];
-		prog->philos[i].prog = prog; 
+		prog->philos[i].prog = prog;
+		i++;
 	}
 }
 
