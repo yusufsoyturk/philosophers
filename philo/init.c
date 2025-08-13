@@ -6,18 +6,11 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:25:50 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/11 18:37:41 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/13 10:04:36 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/philo.h"
-
-size_t ft_get_time()
-{
-	struct timeval tv;
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
 
 void	ft_init_philos(t_prog *prog)
 {

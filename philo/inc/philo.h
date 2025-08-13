@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:18:59 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/11 16:25:21 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/13 11:42:39 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ typedef struct s_prog
 }			t_prog;
 
 long	ft_atol(char *str);
-int	arg_checker(char **av);
-int	arg_val_checker(char **av);
+int		arg_checker(char **av);
+int		arg_val_checker(char **av);
 void	ft_init_prog(t_prog *prog, char **av);
 void	ft_init_philos(t_prog *prog);
-size_t ft_get_time();
+long	ft_get_time();
+void	ft_usleep(long time, t_prog *prog);
+void	print_event(t_prog *prog, char *msg, int id);
+void	*ft_routine(void *args);
 
 #endif

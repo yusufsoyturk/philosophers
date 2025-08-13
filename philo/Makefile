@@ -8,10 +8,12 @@ CFLAGS = -Wall -Wextra -Werror
 
 UTILS = utils/arg_checker.c \
 		utils/ft_atol.c \
+		utils/utils.c 
 		
 
 SRCS = $(UTILS)\
 		init.c \
+		philo_routine.c \
 		 main.c\
 
 OBJS = $(SRCS:.c=.o)
