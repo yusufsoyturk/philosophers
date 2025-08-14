@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:25:50 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/13 10:04:36 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/14 12:36:12 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,31 @@ void	ft_init_philos(t_prog *prog)
 		prog->philos[i].prog = prog;
 		i++;
 	}
+}
+
+int	ft_create_threads(t_prog *prog)
+{
+	int			i;
+	pthread_t	observer;
+
+	i = 0;
+	ft_init_philos(prog);
+	while (i < prog->num_of_philos)
+	{
+		if (pthread_create(&prog->philos[i].thread, NULL, ft_routine, &prog->philos[i]) != 0)
+			return (1);
+		i++;
+	}
+	if (pthread_create(&observer, NULL, monitor, prog) != 0)
+		return (1);
+	i = 0;
+	while (i < prog->num_of_philos)
+	{
+		pthread_join(prog->philos[i].thread, NULL);
+		i++;
+	}
+	pthread_join(observer, NULL);
+	return (0);
 }
 
 void	ft_init_prog(t_prog *prog, char **av)
@@ -52,5 +77,5 @@ void	ft_init_prog(t_prog *prog, char **av)
 		pthread_mutex_init(&prog->forks[i], NULL);
 		i++;
 	}
-	ft_init_philos(prog);
+	ft_create_threads(prog);
 }

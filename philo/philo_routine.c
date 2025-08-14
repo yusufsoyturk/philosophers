@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 10:45:18 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/13 12:46:39 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/14 10:03:54 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,20 @@ void	take_fork(t_philo *philo, t_prog *prog)
 
 }
 
+void	sleep_and_think(t_philo *philo, t_prog *prog)
+{
+	print_event(prog, "is sleeping", philo->id);
+	ft_usleep(prog->time_to_sleep, prog);
+	print_event(prog, "is thinking", philo->id);
+}
+
+void	meal_counter(t_philo *philo, t_prog *prog)
+{
+	pthread_mutex_lock(&prog->meal_lock);
+	philo->meals_eaten ++;
+	pthread_mutex_unlock(&prog->meal_lock);
+}
+
 void	*ft_routine(void *args)
 {
 	t_philo *philo;
@@ -47,21 +61,22 @@ void	*ft_routine(void *args)
 	philo = (t_philo *)args;
 	prog = philo->prog;
 	if (prog->num_of_philos == 1)
+	{
 		just_one_philo(prog, philo);
+		return (NULL);	
+	}
 	while (prog->dead_flag == 0)
 	{
 		take_fork(philo, prog);
 		pthread_mutex_lock(&prog->meal_lock);
 		philo->last_meal = ft_get_time();
-		philo->meals_eaten ++;
 		pthread_mutex_unlock(&prog->meal_lock);
 		print_event(prog, "is eating", philo->id);
 		ft_usleep(prog->time_to_eat, prog);
+		meal_counter(philo, prog);
 		pthread_mutex_unlock(philo->r_fork);
 		pthread_mutex_unlock(philo->l_fork);
-		print_event(prog, "is sleeping", philo->id);
-		ft_usleep(prog->time_to_sleep, prog);
-		print_event(prog, "is thinking", philo->id);
+		sleep_and_think(philo, prog);
 	}
 	return (NULL);
 }

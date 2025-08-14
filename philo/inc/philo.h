@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:18:59 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/13 11:42:39 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/14 12:24:06 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,11 @@ long	ft_get_time();
 void	ft_usleep(long time, t_prog *prog);
 void	print_event(t_prog *prog, char *msg, int id);
 void	*ft_routine(void *args);
+void	sleep_and_think(t_philo *philo, t_prog *prog);
+void	take_fork(t_philo *philo, t_prog *prog);
+void	just_one_philo(t_prog *prog, t_philo *philo);
+void	meal_counter(t_philo *philo, t_prog *prog);
+void	*monitor(void *args);
+int		ft_create_threads(t_prog *prog);
 
 #endif
