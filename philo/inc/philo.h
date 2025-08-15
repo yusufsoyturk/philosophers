@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:18:59 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/14 12:24:06 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/15 10:48:34 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	just_one_philo(t_prog *prog, t_philo *philo);
 void	meal_counter(t_philo *philo, t_prog *prog);
 void	*monitor(void *args);
 int		ft_create_threads(t_prog *prog);
+void	free_all(t_prog *prog);
 
 #endif

@@ -4,7 +4,7 @@ CC = cc
 
 RM = rm -rf
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror
 
 UTILS = utils/arg_checker.c \
 		utils/ft_atol.c \
@@ -15,6 +15,7 @@ SRCS = $(UTILS)\
 		init.c \
 		philo_routine.c \
 		monitor.c \
+		free.c \
 		 main.c\
 
 OBJS = $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:25:50 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/14 12:36:12 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/15 12:49:59 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	ft_init_prog(t_prog *prog, char **av)
 	prog->time_to_die = ft_atol(av[2]);
 	prog->time_to_eat = ft_atol(av[3]);
 	prog->time_to_sleep = ft_atol(av[4]);
+	prog->num_times_to_eat = -1;
 	if (av[5])
 		prog->num_times_to_eat = ft_atol(av[5]);
 	prog->start_time = ft_get_time();

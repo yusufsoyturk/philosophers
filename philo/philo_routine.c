@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 10:45:18 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/14 10:03:54 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/15 11:23:20 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,23 @@ void	*ft_routine(void *args)
 {
 	t_philo *philo;
 	t_prog	*prog;
+	int		is_dead;
 
 	philo = (t_philo *)args;
 	prog = philo->prog;
+	is_dead = 0;
 	if (prog->num_of_philos == 1)
 	{
 		just_one_philo(prog, philo);
 		return (NULL);	
 	}
-	while (prog->dead_flag == 0)
+	while (1)
 	{
+		pthread_mutex_lock(&prog->dead_lock);
+		is_dead = prog->dead_flag;
+		pthread_mutex_unlock(&prog->dead_lock);
+		if (is_dead == 1)
+			break;
 		take_fork(philo, prog);
 		pthread_mutex_lock(&prog->meal_lock);
 		philo->last_meal = ft_get_time();

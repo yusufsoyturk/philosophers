@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:18:36 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/14 12:40:01 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/15 10:34:50 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void print_program(t_prog *prog)
 int main(int ac, char **av)
 {
 	t_prog	prog;
-    // t_philo *philos;
-	memset(&prog, 0, sizeof(prog));
+
 	if (ac != 5 && ac != 6)
 	{
 		write(2, "Wrong argument count\n", 22);
@@ -79,4 +78,5 @@ int main(int ac, char **av)
 		return (1);
 	}
 	ft_init_prog(&prog, av);
+    free_all(&prog);
 }
