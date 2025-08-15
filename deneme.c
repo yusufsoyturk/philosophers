@@ -19,3 +19,7 @@ int main()
 	now = ft_get_time();
 	printf("%ld\n%ld\n", start, now);
 }
+//valgrind --tool=helgrind ./philo 5 8000 200 200 3
+//valgrind --tool=drd ./philo 5 8000 200 200 3
+//cflags kısmına ekle: -fsanitize=thread
+//4 310 200 100
