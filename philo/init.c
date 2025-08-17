@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:25:50 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/15 12:49:59 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:10:45 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ft_init_philos(t_prog *prog)
 		prog->philos[i].last_meal = prog->start_time;
 		prog->philos[i].meals_eaten = 0;
 		prog->philos[i].r_fork = &prog->forks[i];
-		prog->philos[i].l_fork = &prog->forks[(i + prog->num_of_philos - 1) % prog->num_of_philos];
+		prog->philos[i].l_fork = &prog->forks[(i + prog->num_of_philos - 1)
+			% prog->num_of_philos];
 		prog->philos[i].prog = prog;
 		i++;
 	}
@@ -39,7 +40,8 @@ int	ft_create_threads(t_prog *prog)
 	ft_init_philos(prog);
 	while (i < prog->num_of_philos)
 	{
-		if (pthread_create(&prog->philos[i].thread, NULL, ft_routine, &prog->philos[i]) != 0)
+		if (pthread_create(&prog->philos[i].thread, NULL, ft_routine,
+				&prog->philos[i]) != 0)
 			return (1);
 		i++;
 	}

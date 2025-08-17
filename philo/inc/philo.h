@@ -6,31 +6,31 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:18:59 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/15 10:48:34 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:11:55 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
-#define PHILO_H
+# define PHILO_H
 
-# include <limits.h>	// INT_MAX
-#include <string.h>		// memset
-#include <stdio.h>		// printf
-#include <stdlib.h>		// malloc, free
-#include <unistd.h>		// write, usleep
-#include <sys/time.h>   // gettimeofday
-#include <pthread.h>	// pthreads için 
+# include <limits.h>
+# include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/time.h>
+# include <unistd.h>
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int				id;
 	pthread_t		thread;
-	size_t			last_meal; // ölüm zamanı için
-	int				meals_eaten; //opsiyonel bölüm için
-	pthread_mutex_t *r_fork;
-	pthread_mutex_t *l_fork;
+	size_t			last_meal;
+	int				meals_eaten;
+	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*l_fork;
 	struct s_prog	*prog;
-}				t_philo;
+}					t_philo;
 
 typedef struct s_prog
 {
@@ -43,26 +43,26 @@ typedef struct s_prog
 	long			time_to_eat;
 	long			time_to_die;
 	long			time_to_sleep;
-	long            num_times_to_eat;
+	long			num_times_to_eat;
 	size_t			start_time;
 	t_philo			*philos;
-}			t_prog;
+}					t_prog;
 
-long	ft_atol(char *str);
-int		arg_checker(char **av);
-int		arg_val_checker(char **av);
-void	ft_init_prog(t_prog *prog, char **av);
-void	ft_init_philos(t_prog *prog);
-long	ft_get_time();
-void	ft_usleep(long time, t_prog *prog);
-void	print_event(t_prog *prog, char *msg, int id);
-void	*ft_routine(void *args);
-void	sleep_and_think(t_philo *philo, t_prog *prog);
-void	take_fork(t_philo *philo, t_prog *prog);
-void	just_one_philo(t_prog *prog, t_philo *philo);
-void	meal_counter(t_philo *philo, t_prog *prog);
-void	*monitor(void *args);
-int		ft_create_threads(t_prog *prog);
-void	free_all(t_prog *prog);
+long				ft_atol(char *str);
+int					arg_checker(char **av);
+int					arg_val_checker(char **av);
+void				ft_init_prog(t_prog *prog, char **av);
+void				ft_init_philos(t_prog *prog);
+long				ft_get_time(void);
+void				ft_usleep(long time, t_prog *prog);
+void				print_event(t_prog *prog, char *msg, int id);
+void				*ft_routine(void *args);
+void				sleep_and_think(t_philo *philo, t_prog *prog);
+void				take_fork(t_philo *philo, t_prog *prog);
+void				just_one_philo(t_prog *prog, t_philo *philo);
+void				meal_counter(t_philo *philo, t_prog *prog);
+void				*monitor(void *args);
+int					ft_create_threads(t_prog *prog);
+void				free_all(t_prog *prog);
 
 #endif

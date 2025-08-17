@@ -6,19 +6,11 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 10:45:18 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/15 11:23:20 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:12:23 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inc/philo.h"
-
-void	just_one_philo(t_prog *prog, t_philo *philo)
-{
-	pthread_mutex_lock(philo->r_fork);
-	print_event(prog, "has taken a fork", philo->id);
-	ft_usleep(prog->time_to_die, prog);
-	pthread_mutex_unlock(philo->r_fork);
-}
 
 void	take_fork(t_philo *philo, t_prog *prog)
 {
@@ -36,7 +28,6 @@ void	take_fork(t_philo *philo, t_prog *prog)
 		pthread_mutex_lock(philo->r_fork);
 		print_event(prog, "has taken a fork", philo->id);
 	}
-
 }
 
 void	sleep_and_think(t_philo *philo, t_prog *prog)
@@ -49,31 +40,21 @@ void	sleep_and_think(t_philo *philo, t_prog *prog)
 void	meal_counter(t_philo *philo, t_prog *prog)
 {
 	pthread_mutex_lock(&prog->meal_lock);
-	philo->meals_eaten ++;
+	philo->meals_eaten++;
 	pthread_mutex_unlock(&prog->meal_lock);
 }
 
-void	*ft_routine(void *args)
+static void	philo_loop(t_philo *philo, t_prog *prog)
 {
-	t_philo *philo;
-	t_prog	*prog;
-	int		is_dead;
+	int	is_dead;
 
-	philo = (t_philo *)args;
-	prog = philo->prog;
-	is_dead = 0;
-	if (prog->num_of_philos == 1)
-	{
-		just_one_philo(prog, philo);
-		return (NULL);	
-	}
 	while (1)
 	{
 		pthread_mutex_lock(&prog->dead_lock);
 		is_dead = prog->dead_flag;
 		pthread_mutex_unlock(&prog->dead_lock);
 		if (is_dead == 1)
-			break;
+			break ;
 		take_fork(philo, prog);
 		pthread_mutex_lock(&prog->meal_lock);
 		philo->last_meal = ft_get_time();
@@ -85,5 +66,20 @@ void	*ft_routine(void *args)
 		pthread_mutex_unlock(philo->l_fork);
 		sleep_and_think(philo, prog);
 	}
+}
+
+void	*ft_routine(void *args)
+{
+	t_philo	*philo;
+	t_prog	*prog;
+
+	philo = (t_philo *)args;
+	prog = philo->prog;
+	if (prog->num_of_philos == 1)
+	{
+		just_one_philo(prog, philo);
+		return (NULL);
+	}
+	philo_loop(philo, prog);
 	return (NULL);
 }

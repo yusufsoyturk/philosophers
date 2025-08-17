@@ -6,7 +6,7 @@
 /*   By: ysoyturk <ysoyturk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 15:18:44 by ysoyturk          #+#    #+#             */
-/*   Updated: 2025/08/14 09:35:59 by ysoyturk         ###   ########.fr       */
+/*   Updated: 2025/08/17 11:22:08 by ysoyturk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	arg_checker(char **av)
 			return (1);
 		i++;
 	}
-		
+	if (ft_atol(av[1]) <= 0 || ft_atol(av[1]) > 250)
+		return (1);
 	return (0);
 }
